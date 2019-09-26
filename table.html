@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="container my-5">
+    <table class="table">
+        <thead id="demo">
+            <tr class="table bg-dark text-white">
+                <th>S NO</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>PHONE NUMBER</th>
+                <th>ADDRESS</th>
+                <th>VIEW MORE</th>
+                
+            </tr>
+        </thead>
+        <tbody >
+            
+        </tbody>
+    </table>
+</div>
+
+<button class="btn bg-success mx-5" onclick="getuser()"> Get User</button>
+
+<script>
+
+    function getuser(){
+        document.getElementById('demo').innerHTML ='';
+        var http=new XMLHttpRequest();
+        http.open('GET','https://jsonplaceholder.typicode.com/users');
+        http.send();
+        http.onreadystatechange=function(){
+            if(this.readyState==4){
+               
+            
+
+                var res=JSON.parse(this.responseText);
+                prepareList(res);
+            }
+        }
+        http.onerror=function(){
+            debugger
+        }
+    }
+
+    function prepareList(users){
+        var ele='';
+        users.forEach(function(obj,index){
+            ele='<tr>'+
+            '<td>'+obj.id+'</td>'+
+            '<td>'+obj.name+'</td>'+
+            '<td>'+obj.email+'</td>'+
+            '<td>'+obj.phone+'</td>'+
+            '<td>'+obj.address.city+'</td>'+
+            '<td>'+
+            '<button class="btn bg-info" type="button" onclick="getput('+obj.id+')">'+'Edit'+'</button>'+
+            '</td>'+
+            '</tr>'
+            document.getElementById('demo').innerHTML +=ele;   
+
+        })
+    }
+
+   function getput(userId){
+
+     
+        location.href="file:///C:/Users/Murali%20Krishna%20Yakka/Desktop/nav.html";
+
+        var usersId=localStorage.setItem('id','userId');
+
+
+        
+
+
+
+    }
+        
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
